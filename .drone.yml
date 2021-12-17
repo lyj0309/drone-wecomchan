@@ -17,10 +17,10 @@ steps:
       repo: lyj0309/drone-wecomchan
       auto_tag: true
 
-#  - name: sendmsg
-#    image: yakumioto/drone-wecomchan
-#    settings:
-#      key:
-#        from_secret: wecomchan_key
-#      text: succeeded
-#      desp: docker build yakumioto/wecomchan
+  - name: sendmsg
+    image: lyj0309/drone-wecomchan
+    settings:
+      key:
+        from_secret: wecomchan_key
+      path: https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan
+      msg: build_success
