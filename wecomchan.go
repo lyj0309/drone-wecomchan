@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -16,7 +18,7 @@ func main() {
 		log.Fatalln("key or title[text] or path is required")
 	}
 
-	res, err := http.PostForm(path, url.Values{
+	resp, err := http.PostForm(path, url.Values{
 		"sendkey":  []string{key},
 		"msg":      []string{msg},
 		"msg_type": []string{"text"},
@@ -24,8 +26,13 @@ func main() {
 	if err != nil {
 		log.Fatalln("post error:", err)
 	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+	log.Println(string(body))
 
-	if res.StatusCode != http.StatusOK {
-		log.Fatalln("status code:", res.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalln("status code:", resp.StatusCode)
 	}
 }
