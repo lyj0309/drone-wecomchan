@@ -17,8 +17,9 @@ func main() {
 	}
 
 	res, err := http.PostForm(path, url.Values{
-		"sendkey": []string{key},
-		"msg":     []string{msg},
+		"sendkey":  []string{key},
+		"msg":      []string{msg},
+		"msg_type": []string{"text"},
 	})
 	if err != nil {
 		log.Fatalln("post error:", err)
